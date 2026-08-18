@@ -3,6 +3,7 @@
 #include "cache.h"
 #include "qff.h"
 #include "utils.h"
+#include "fmt.h"
 #include "console.h"
 
 uint8_t *top_screen, *bottom_screen;
@@ -23,10 +24,21 @@ void main(int argc, char** argv) {
   
   console_puts(&console, "lunix v0.1.0\n");
   while (true) {
-    console_draw(&console);
-    if (!(system_shellstate() & 2)) {
+    
+    uint16_t events = system_events();
+
+    console_puts(&console, "events: ");
+    char buf[32];
+    snprintf(buf, sizeof(buf), "events: %u\n", events);
+    console_puts(&console, buf);   
+    console_puts(&console, "\n");
+    
+    if (!(system_shellstate() & 2) || system_events() & 1) {
       break;
     }
+
+    ClearScreenF(true, true, COLOR_STD_BG);
+    console_draw(&console);
   }
 
   fs_deinit();

@@ -2,6 +2,10 @@
 #include "cache.h"
 #include "timer.h"
 
+#define PDC0_BASE 0x10400400
+#define PDC0_CTRL   (*(volatile uint32_t *)(PDC0_BASE + 0x74))
+#define PDC0_STATUS (*(volatile uint32_t *)(PDC0_BASE + 0x78))
+
 #define TICKS_PER_SEC       67027964ULL
 #define REG_TIMER_CNT(i)    *(volatile uint16_t *)(0x10003002 + 4 * i)
 #define REG_TIMER_VAL(i)    *(volatile uint16_t *)(0x10003000 + 4 * i)
@@ -31,4 +35,14 @@ void system_wait(u64 ms) {
   timer_start();
   u64 initial_value = timer_msec();
   while (timer_msec() - initial_value < ms);
+}
+
+void system_wait_vblank(void) {
+  while (!(PDC0_STATUS & (1 << 17))) {
+  }  
+  PDC0_STATUS = (1 << 17);
+}
+
+uint16_t system_events() {
+  return I2C_readReg(I2C_DEV_MCU, 0x18);
 }
