@@ -16,11 +16,11 @@ include $(DEVKITARM)/ds_rules
 # INCLUDES is a list of directories containing header files
 # SPECS is the directory containing the important build and link files
 #---------------------------------------------------------------------------------
-export TARGET	:=	hello_firmware
+export TARGET	:=	lunix3ds
 BUILD		:=	build
-SOURCES		:=	source source/common source/fs source/crypto source/fatfs source/nand source/safety source/utils
+SOURCES		:=	source source/common source/fs source/crypto source/fatfs source/nand source/safety source/utils source/kernel
 DATA		:=	data
-INCLUDES	:=	source source/common source/font source/fs source/crypto source/fatfs source/nand source/safety source/utils
+INCLUDES	:=	source source/common source/font source/fs source/crypto source/fatfs source/nand source/safety source/utils source/kernel
 
 #---------------------------------------------------------------------------------
 # options for code generation
@@ -184,7 +184,7 @@ clean:
 	@-make clean --no-print-directory -C BrahmaLoader
 	@echo clean 2xrsa...
 	@-make clean --no-print-directory -C 2xrsa
-	@echo clean hello_firmware...
+	@echo clean lunix3ds...
 	@rm -fr $(BUILD) $(OUTPUT_D) $(RELEASE)
 
 

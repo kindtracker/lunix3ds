@@ -160,7 +160,7 @@ _skip_gw:
     mcr p15, 0, r8, c2, c0, 0	@ Data cacheable 0, 2, 5
     mcr p15, 0, r8, c2, c0, 1	@ Inst cacheable 0, 2, 5
 
-    @ Enable dctm
+    @ Enable dtcm
     ldr r1, =0x3000800A        @ set dtcm
     mcr p15, 0, r1, c9, c1, 0  @ set the dtcm Region Register
 

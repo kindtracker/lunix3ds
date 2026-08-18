@@ -3,6 +3,7 @@
 #include "cache.h"
 #include "qff.h"
 #include "utils.h"
+#include "console.h"
 
 uint8_t *top_screen, *bottom_screen;
 
@@ -16,10 +17,13 @@ void main(int argc, char** argv) {
     bottom_screen = (uint8_t *)(*(uint32_t *)0x23FFFE08);
   }
 
+  console_t console = {top_screen, {}, 0};
+
   ClearScreenF(true, true, COLOR_STD_BG);
   
+  console_puts(&console, "lunix v0.1.0\n");
   while (true) {
-    DrawStringF(bottom_screen, 4, 4, COLOR_STD_FONT, COLOR_STD_BG, "Hello, 3DS!\n");
+    console_draw(&console);
     if (!(system_shellstate() & 2)) {
       break;
     }

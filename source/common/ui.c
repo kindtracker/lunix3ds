@@ -53,7 +53,7 @@ void DrawCharacter(u8* screen, int character, int x, int y, int color, int bgcol
         int yDisplacement = ((SCREEN_HEIGHT - (y + yy) - 1) * BYTES_PER_PIXEL);
         u8* screenPos = screen + xDisplacement + yDisplacement;
 
-        u8 charPos = font[character * FONT_HEIGHT + yy];
+        u8 charPos = font[character][yy];
         for (int xx = 7; xx >= (8 - FONT_WIDTH); xx--) {
             if ((charPos >> xx) & 1) {
                 *(screenPos + 0) = color >> 16;  // B
@@ -564,14 +564,14 @@ bool ShowProgress(u64 current, u64 total, const char* opstr)
     }
     DrawRectangle(TOP_SCREEN, bar_pos_x + 2, bar_pos_y + 2, prog_width, bar_height - 4, COLOR_STD_FONT);
     
-    TruncateString(progstr, opstr, (bar_width / FONT_WIDTH_EXT) - 7, 8);
+    TruncateString(progstr, opstr, (bar_width / FONT_WIDTH) - 7, 8);
     snprintf(tempstr, 64, "%s (%lu%%)", progstr, prog_percent);
-    ResizeString(progstr, tempstr, bar_width / FONT_WIDTH_EXT, 8, false);
+    ResizeString(progstr, tempstr, bar_width / FONT_WIDTH, 8, false);
     DrawString(TOP_SCREEN, progstr, bar_pos_x, text_pos_y, COLOR_STD_FONT, COLOR_STD_BG);
     if (sec_elapsed >= 1) {
         snprintf(tempstr, 16, "ETA %02llum%02llus", sec_remain / 60, sec_remain % 60);
         ResizeString(progstr, tempstr, 16, 8, true);
-        DrawString(TOP_SCREEN, progstr, bar_pos_x + bar_width - 1 - (FONT_WIDTH_EXT * 16),
+        DrawString(TOP_SCREEN, progstr, bar_pos_x + bar_width - 1 - (FONT_WIDTH * 16),
             bar_pos_y - 10 - 1, COLOR_STD_FONT, COLOR_STD_BG);
     }
     DrawString(TOP_SCREEN, "(hold B to cancel)", bar_pos_x + 2, text_pos_y + 14, COLOR_STD_FONT, COLOR_STD_BG);

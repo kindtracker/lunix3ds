@@ -1,9 +1,10 @@
-# hello_firmware_template_3ds
-A template to make firmwares for 3DS. This is based on [SafeB9SInstaller](https://github.com/d0k3/SafeB9SInstaller) and some functions and files are from [Luma3DS](https://github.com/LumaTeam/Luma3DS/).
+# Lunix3DS
+Lunix3DS is an operating system for 3DS, it tries to run Linux applications.
 
 ## Credits
+### This uses (hello_firmware_template_3ds)[https://github.com/kindtracker/hello_firmware_template_3ds], credit to myself too
 * **LumaTeam**, for types, cache.h, cache.s, wait function, some code and functions
-* **d0k3**, for base of template (https://github.com/d0k3/SafeB9SInstaller)
+* **d0k3**, for base of Lunix3DS (https://github.com/d0k3/SafeB9SInstaller)
 * **Normmatt**, for sdmmc.c / sdmmc.h
 * **Cha(N)**, **Kane49**, and all other FatFS contributors for FatFS
 * **Myria** for the sighax bruteforcer and for finding the sighax (retail&dev) signature
