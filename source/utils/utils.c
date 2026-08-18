@@ -2,7 +2,7 @@
 #include "cache.h"
 #include "timer.h"
 
-#define PDC0_BASE 0x10400400
+#define PDC0_BASE   0x10400000
 #define PDC0_CTRL   (*(volatile uint32_t *)(PDC0_BASE + 0x74))
 #define PDC0_STATUS (*(volatile uint32_t *)(PDC0_BASE + 0x78))
 
@@ -37,9 +37,14 @@ void system_wait(u64 ms) {
   while (timer_msec() - initial_value < ms);
 }
 
-void system_wait_vblank(void) {
-  while (!(PDC0_STATUS & (1 << 17))) {
-  }  
+void system_vblank_init() {
+  PDC0_CTRL &= ~(1 << 9);
+  PDC0_STATUS = (1 << 17);
+}
+
+void system_wait_vblank() { 
+  PDC0_CTRL &= ~(1 << 9);
+  while (!(PDC0_STATUS & (1 << 17))) {} 
   PDC0_STATUS = (1 << 17);
 }
 

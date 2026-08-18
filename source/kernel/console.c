@@ -2,7 +2,6 @@
 #include "common.h"
 #include "console.h"
 
-// TODO: dont overflow buffer
 void console_put(console_t *console, char chr) {
   if (console->buffer_len >= sizeof(console->buffer)) {
     memmove(console->buffer, console->buffer + 1, sizeof(console->buffer) - 1);
@@ -28,7 +27,7 @@ void console_draw(console_t *console) {
   int visible_lines = SCREEN_HEIGHT_TOP / 8;
   int first_line = 0;
   if (lines >= visible_lines) {
-    first_line = lines - visible_lines + 1;
+    first_line = lines - visible_lines;
   }
 
   int current_line = 0;
@@ -37,13 +36,17 @@ void console_draw(console_t *console) {
   for (int i = 0; i < console->buffer_len; i++) {
     char chr = console->buffer[i];
     if (chr == '\n') {
-      x = 0;
-      y += 8; 
+      current_line++;
+      if (current_line > first_line) { 
+        x = 0;
+        y += 8; 
+      }
       continue;
     }
-    if (current_line < first_line) {
-        current_line++; continue;
+    if (current_line < first_line) { 
+      continue;
     }
+
     DrawCharacter(console->screen, chr, x, y, COLOR_STD_FONT, COLOR_STD_BG);
     x += 8;
     if (x + 8 > SCREEN_WIDTH_TOP) {

@@ -23,8 +23,7 @@ void main(int argc, char** argv) {
   ClearScreenF(true, true, COLOR_STD_BG);
   
   console_puts(&console, "lunix v0.1.0\n");
-  while (true) {
-    
+  while (true) {  
     uint16_t events = system_events();
 
     console_puts(&console, "events: ");
@@ -39,6 +38,9 @@ void main(int argc, char** argv) {
 
     ClearScreenF(true, true, COLOR_STD_BG);
     console_draw(&console);
+    
+    // TODO: implement/fix vblank
+    system_wait(1000/60);
   }
 
   fs_deinit();
