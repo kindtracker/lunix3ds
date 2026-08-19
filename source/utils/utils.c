@@ -37,17 +37,6 @@ void system_wait(u64 ms) {
   while (timer_msec() - initial_value < ms);
 }
 
-void system_vblank_init() {
-  PDC0_CTRL &= ~(1 << 9);
-  PDC0_STATUS = (1 << 17);
-}
-
-void system_wait_vblank() { 
-  PDC0_CTRL &= ~(1 << 9);
-  while (!(PDC0_STATUS & (1 << 17))) {} 
-  PDC0_STATUS = (1 << 17);
-}
-
 uint16_t system_events() {
   return I2C_readReg(I2C_DEV_MCU, 0x18);
 }
