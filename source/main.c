@@ -49,7 +49,10 @@ void main(int argc, char** argv) {
     bottom_screen = bottom_screen_fb[current_fb];
     console.screen = top_screen;
 
-    ClearScreenF(true, true, COLOR_STD_BG);
+    if (console.new) {
+      ClearScreenF(true, true, COLOR_STD_BG);
+      console.new = false;
+    }
     console_draw(&console);
 
     boot();

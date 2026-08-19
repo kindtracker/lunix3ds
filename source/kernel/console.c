@@ -8,6 +8,7 @@ void console_put(console_t *console, char chr) {
     console->buffer_len = sizeof(console->buffer) - 1;
   }
   console->buffer[console->buffer_len++] = chr;
+  console->new = true;
 }
 
 void console_puts(console_t *console, const char *str) {
