@@ -38,6 +38,9 @@ COMMON_CFLAGS := \
 COMMON_INCLUDES := \
 	-I$(PROJECT)/source \
 	-I$(PROJECT)/source/common \
+	-I$(PROJECT)/source/common/hardware \
+	-I$(PROJECT)/source/common/input \
+	-I$(PROJECT)/source/common/ui \
 	-I$(PROJECT)/source/font \
 	-I$(PROJECT)/source/crypto \
 	-I$(PROJECT)/source/fatfs \
@@ -79,6 +82,9 @@ ARM9_BUILD := $(BUILD)/arm9
 ARM9_SOURCES := \
 	$(wildcard $(PROJECT)/source/*.c) \
 	$(wildcard $(PROJECT)/source/common/*.c) \
+	$(wildcard $(PROJECT)/source/common/hardware/*.c) \
+	$(wildcard $(PROJECT)/source/common/input/*.c) \
+	$(wildcard $(PROJECT)/source/common/ui/*.c) \
 	$(wildcard $(PROJECT)/source/crypto/*.c) \
 	$(wildcard $(PROJECT)/source/fatfs/*.c) \
 	$(wildcard $(PROJECT)/source/nand/*.c) \
@@ -87,6 +93,7 @@ ARM9_SOURCES := \
 	$(wildcard $(PROJECT)/source/kernel/*.c) \
 	$(wildcard $(PROJECT)/source/*.s) \
 	$(wildcard $(PROJECT)/source/common/*.s) \
+	$(wildcard $(PROJECT)/source/common/hardware/*.s) \
 	$(wildcard $(PROJECT)/source/nand/*.s)
 
 ARM9_OBJECTS := \

@@ -1,6 +1,6 @@
-#include "fb.h"
-#include "common.h"
-#include "arm11.h"
+#include "kernel/fb.h"
+#include "kernel/arm11.h"
+#include "common/common.h"
 
 void fb_swap(bool is_alt) {
   kernel_invoke_arm11_function(ARM11_SWAP, is_alt);

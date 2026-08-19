@@ -1,6 +1,6 @@
-#include "ui.h"
-#include "common.h"
-#include "console.h"
+#include "ui/ui.h"
+#include "common/common.h"
+#include "kernel/console.h"
 
 void console_put(console_t *console, char chr) {
   if (console->buffer_len >= sizeof(console->buffer)) {

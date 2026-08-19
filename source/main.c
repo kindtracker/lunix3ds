@@ -1,12 +1,12 @@
-#include "ui.h"
-#include "i2c.h"
-#include "cache.h"
-#include "qff.h"
-#include "utils.h"
-#include "fmt.h"
-#include "console.h"
-#include "fb.h"
-#include "boot.h"
+#include "hardware/i2c.h"
+#include "hardware/cache.h"
+#include "hardware/system.h"
+#include "ui/ui.h"
+#include "fatfs/qff.h"
+#include "utils/fmt.h"
+#include "kernel/console.h"
+#include "kernel/fb.h"
+#include "kernel/boot.h"
 
 uint8_t *top_screen_fb[2];
 uint8_t *bottom_screen_fb[2];
@@ -51,16 +51,15 @@ void main(int argc, char** argv) {
 
     if (console.new) {
       ClearScreenF(true, true, COLOR_STD_BG);
+      console_draw(&console);
       console.new = false;
     }
-    console_draw(&console);
 
     boot();
     
     // TODO: implement/fix vblank
     flushEntireDCache();
     fb_swap(current_fb);
-    system_wait(1000 / 30);
   }
 
   fs_deinit();

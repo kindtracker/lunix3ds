@@ -7,7 +7,7 @@ console_t console;
 
 int boot() {
   if (booting == 0) {
-    console = (console_t){0, {}, 0};
+    console = (console_t){0, {}, 0, false};
     console_puts(&console, "lunix v0.1.0\n");
     console_puts(&console, "booting\n");
     booting = 1;
@@ -24,4 +24,5 @@ int boot() {
       return 0;
     }
   }
+  return 0;
 }

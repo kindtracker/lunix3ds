@@ -1,5 +1,6 @@
 #pragma once
 #include <stdint.h>
+
 #define ARM11_READY       0
 #define ARM11_SWAP        1
 #define ARM11_GET_STATUS_TOP  2

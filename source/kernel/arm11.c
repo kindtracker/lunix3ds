@@ -10,9 +10,9 @@ void kernel_invoke_arm11_function(uint32_t op, uint32_t param) {
 }
 
 uint32_t kernel_invoke_arm11_function_return(uint32_t op, uint32_t param) {
-    while (*operation != ARM11_READY);
-    *parameter = param;
-    *operation = op;
-    while (*operation != ARM11_READY);
-    return *parameter;
+  while (*operation != ARM11_READY);
+  *parameter = param;
+  *operation = op;
+  while (*operation != ARM11_READY);
+  return *parameter;
 }
