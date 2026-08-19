@@ -60,7 +60,7 @@ void main(int argc, char** argv) {
     
     // TODO: implement/fix vblank
     flushEntireDCache();
-    fb_swap(current_fb);
+    // fb_swap(current_fb);
     system_wait(1000 / 20);
   }
 
