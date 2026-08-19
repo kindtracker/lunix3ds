@@ -1,9 +1,11 @@
 #pragma once
+#include <stdint.h>
 
 typedef struct {
   uint8_t *screen;
   char buffer[16384];
   int buffer_len;
+  bool new;
 } console_t;
 
 void console_put(console_t *console, char chr);

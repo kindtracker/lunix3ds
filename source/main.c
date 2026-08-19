@@ -6,6 +6,7 @@
 #include "fmt.h"
 #include "console.h"
 #include "fb.h"
+#include "boot.h"
 
 uint8_t *top_screen_fb[2];
 uint8_t *bottom_screen_fb[2];
@@ -32,12 +33,12 @@ void main(int argc, char** argv) {
     bottom_screen = bottom_screen_fb[0];
   }
 
-  console_t console = {top_screen_fb[0], {}, 0};
+  booting = 0;
+  boot();
+  console.screen = top_screen_fb[0];
 
   ClearScreenF(true, true, COLOR_STD_BG);
   
-  console_puts(&console, "lunix v0.1.0\n");
-  console_puts(&console, "booting\n");
   while (true) {  
     if ((!(system_shellstate() & 2)) || system_special_keys()) {
       break;
@@ -50,6 +51,8 @@ void main(int argc, char** argv) {
 
     ClearScreenF(true, true, COLOR_STD_BG);
     console_draw(&console);
+
+    boot();
     
     // TODO: implement/fix vblank
     flushEntireDCache();

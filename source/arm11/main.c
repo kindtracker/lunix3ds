@@ -1,8 +1,8 @@
 #include <stdint.h>
 #include "arm11.h"
 
-#define PDC_TOP_FB_STATUS    (*(volatile uint32_t *)0x10400400)
-#define PDC_BOTTOM_FB_STATUS (*(volatile uint32_t *)0x10400500)
+#define PDC_TOP_FB_STATUS    (*(volatile uint32_t *)0x10400478)
+#define PDC_BOTTOM_FB_STATUS (*(volatile uint32_t *)0x10400578)
 
 #define PDC_TOP_FB_SELECT    (*(volatile uint32_t *)0x10400478)
 #define PDC_BOTTOM_FB_SELECT (*(volatile uint32_t *)0x10400578)
