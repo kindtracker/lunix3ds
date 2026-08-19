@@ -37,16 +37,9 @@ void main(int argc, char** argv) {
   ClearScreenF(true, true, COLOR_STD_BG);
   
   console_puts(&console, "lunix v0.1.0\n");
+  console_puts(&console, "booting\n");
   while (true) {  
-    uint16_t events = system_events();
-
-    console_puts(&console, "events: ");
-    char buf[32];
-    snprintf(buf, sizeof(buf), "events: %u\n", events);
-    console_puts(&console, buf);   
-    console_puts(&console, "\n");
-    
-    if (!(system_shellstate() & 2) || system_events() & 1) {
+    if ((!(system_shellstate() & 2)) || system_special_keys()) {
       break;
     }
 
@@ -60,8 +53,8 @@ void main(int argc, char** argv) {
     
     // TODO: implement/fix vblank
     flushEntireDCache();
-    // fb_swap(current_fb);
-    system_wait(1000 / 20);
+    fb_swap(current_fb);
+    system_wait(1000 / 30);
   }
 
   fs_deinit();

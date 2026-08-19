@@ -7,5 +7,7 @@ _start:
 
   ldr sp, =0x1FFFE000
 
+  bl arm11_main
+
 1:
   b 1b

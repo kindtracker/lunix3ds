@@ -9,4 +9,4 @@ uint8_t system_shellstate();
 void system_wait(u64 ms);
 void system_vblank_init();
 void system_wait_vblank();
-uint16_t system_events();
+uint32_t system_special_keys();

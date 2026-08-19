@@ -37,6 +37,6 @@ void system_wait(u64 ms) {
   while (timer_msec() - initial_value < ms);
 }
 
-uint16_t system_events() {
-  return I2C_readReg(I2C_DEV_MCU, 0x18);
+uint32_t system_special_keys() {
+  return I2C_readReg(I2C_DEV_MCU, 0x10);
 }
