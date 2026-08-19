@@ -54,7 +54,7 @@ void DrawCharacter(u8* screen, int character, int x, int y, int color, int bgcol
         u8* screenPos = screen + xDisplacement + yDisplacement;
 
         u8 charPos = font[character][yy];
-        for (int xx = 7; xx >= (8 - FONT_WIDTH); xx--) {
+        for (int xx = 0; xx < FONT_WIDTH; xx++) {
             if ((charPos >> xx) & 1) {
                 *(screenPos + 0) = color >> 16;  // B
                 *(screenPos + 1) = color >> 8;   // G
