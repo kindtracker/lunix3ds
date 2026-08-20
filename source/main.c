@@ -54,12 +54,9 @@ void main(int argc, char** argv) {
       console_draw(&console);
       console.new = false;
     }
-
     boot();
-    
-    // TODO: implement/fix vblank
-    flushEntireDCache();
-    fb_swap(current_fb);
+   
+    // TODO: implement/fix vblank, framebuffer swaping
   }
 
   fs_deinit();
