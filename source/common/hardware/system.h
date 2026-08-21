@@ -10,3 +10,4 @@ void system_wait(u64 ms);
 void system_vblank_init();
 void system_wait_vblank();
 uint32_t system_special_keys();
+uint32_t system_volume_slider();

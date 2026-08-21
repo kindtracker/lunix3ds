@@ -40,3 +40,7 @@ void system_wait(u64 ms) {
 uint32_t system_special_keys() {
   return I2C_readReg(I2C_DEV_MCU, 0x10);
 }
+
+uint32_t system_volume_slider() {
+  return I2C_readReg(I2C_DEV_MCU, 0x09);
+}

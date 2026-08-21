@@ -15,6 +15,14 @@ uint8_t *bottom_screen;
 
 bool current_fb = false;
 
+// This table is from GodMode9
+static const u8 brightness_lvls[] = {
+	0x10, 0x17, 0x1E, 0x25,
+	0x2C, 0x34, 0x3C, 0x44,
+	0x4D, 0x56, 0x60, 0x6B,
+	0x79, 0x8C, 0xA7, 0xD2
+};
+
 void main(int argc, char** argv) {
   if (argc >= 2) {
     uint8_t **fb = (uint8_t **)(void *)argv[1];
@@ -55,6 +63,8 @@ void main(int argc, char** argv) {
       console.new = false;
     }
     boot();
+
+    int bright_lvl = (system_volume_slider() >> 2);
    
     // TODO: implement/fix vblank, framebuffer swaping
   }
