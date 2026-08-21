@@ -1,3 +1,9 @@
+// This file is part of SafeB9SInstaller, by d0k3.
+// Modified for Lunix3ds by kindtracker
+//
+// Licensed under the GNU General Public License v3.0
+
+
 #include "qff.h"
 
 #define NUM_FS 4
@@ -7,6 +13,16 @@ static FATFS* fs = (FATFS*) 0x20316000;
 
 // currently open file systems
 static FRESULT fs_mounted[NUM_FS];
+
+FRESULT f_qopen(FIL *fp, const TCHAR *path, BYTE flags) {
+  FRESULT res = f_open(fp, path, flags);
+
+  if (res != FR_OK) {
+    return res;
+  }
+
+  return res;
+}
 
 FRESULT f_qread (const TCHAR* path, void* buff, FSIZE_t ofs, UINT btr, UINT* br) {
     FIL fp;

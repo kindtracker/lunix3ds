@@ -22,6 +22,10 @@
 *       * Prohibiting misrepresentation of the origin of that material,
 *         or requiring that modified versions of such material be marked in
 *         reasonable ways as different from the original version.
+*
+*   Modified for Lunix3DS.
+*   Copyright (C) 2026 kindtracker
+*
 */
 
 /* File : barebones/ee_printf.c

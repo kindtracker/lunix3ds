@@ -1,6 +1,13 @@
+// This file is part of SafeB9SInstaller, by d0k3.
+// Modified for Lunix3ds by kindtracker
+//
+// Licensed under the GNU General Public License v3.0
+
 #pragma once
 
 #include "ff.h"
+
+FRESULT f_qopen(FIL *fp, const TCHAR *path, BYTE flags);
 
 // additional quick read / write functions
 FRESULT f_qread (const TCHAR* path, void* buff, FSIZE_t ofs, UINT btr, UINT* br);

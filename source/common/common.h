@@ -1,3 +1,8 @@
+// This file is part of SafeB9SInstaller, by d0k3.
+// Modified for Lunix3ds by kindtracker
+//
+// Licensed under the GNU General Public License v3.0
+
 #pragma once
 
 #include <inttypes.h>
@@ -9,6 +14,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+// This typedef table is from Luma3DS not SafeB9SInstaller
 typedef uint8_t u8;
 typedef uint16_t u16;
 typedef uint32_t u32;
@@ -46,37 +52,12 @@ typedef volatile s64 vs64;
 #define align(v,a) \
     (((v) % (a)) ? ((v) + (a) - ((v) % (a))) : (v))
 
-// SafeB9SInstaller version
-#define VERSION     "0.0.7"
-
-// name of the FIRM to install (also name of the input path)
-#ifndef OPEN_INSTALLER
-#define NAME_FIRM   "boot9strap"
-#else
-#define NAME_FIRM   "sighax"
-#endif
-
-// input / output paths
+// TODO: remove NAME_FIRM, INPUT_PATH, NAND_BUFFER, NAND_BUFFER_SIZE
+#define VERSION     "0.1.0"
+#define NAME_FIRM   ""
 #define INPUT_PATH  "0:/" NAME_FIRM
-
-// cosmetic stuff (for installer status)
-#ifndef OPEN_INSTALLER
-#define APP_TITLE   "SafeB9SInstaller" " v" VERSION
-#define APP_URL     "https://github.com/d0k3/SafeB9SInstaller"
-#define APP_USAGE   "Usage instructions: https://%s.hacks.guide/", IS_DEVKIT ? "panda" : "3ds"
-#else
-#define APP_TITLE   "OpenFirmInstaller" " v" VERSION
-#define APP_URL     "https://github.com/d0k3/SafeB9SInstaller"
-#define APP_USAGE   "Based on SafeB9SInstaller by d0k3"
-#endif
-
-// buffer area defines (big buffer for firm)
-#define WORK_BUFFER         ((u8*) 0x21000000)
-#define WORK_BUFFER_SIZE    (0x400000)
-#define FIRM_BUFFER         ((u8*) 0x21400000)
-#define FIRM_BUFFER_SIZE    (0x400000)
-#define NAND_BUFFER         ((u8*) 0x21800000)
-#define NAND_BUFFER_SIZE    (0x100000)
+#define NAND_BUFFER      ((u8*) 0x21800000)
+#define NAND_BUFFER_SIZE (0x100000)
 
 // testfing flags, only useful to devs
 // #define NO_WRITE     // disables all NAND writes, just for testing

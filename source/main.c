@@ -3,10 +3,10 @@
 #include "hardware/system.h"
 #include "ui/ui.h"
 #include "fatfs/qff.h"
-#include "utils/fmt.h"
 #include "kernel/console.h"
 #include "kernel/fb.h"
 #include "kernel/boot.h"
+#include "kernel/lib.h"
 
 uint8_t *top_screen_fb[2];
 uint8_t *bottom_screen_fb[2];

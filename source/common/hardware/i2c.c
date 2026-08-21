@@ -1,3 +1,7 @@
+// This file is part of SafeB9SInstaller, by d0k3.
+//
+// Licensed under the GNU General Public License v3.0
+
 #include "i2c.h"
 
 //-----------------------------------------------------------------------------
