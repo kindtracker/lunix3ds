@@ -65,7 +65,8 @@ void main(int argc, char** argv) {
     boot();
 
     int bright_lvl = (system_volume_slider() >> 2);
-   
+    printf("bright_lvl: %d\n", bright_lvl);
+
     // TODO: implement/fix vblank, framebuffer swaping
   }
 

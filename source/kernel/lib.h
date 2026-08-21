@@ -25,4 +25,11 @@ char *strrchr(const char *s, int c);
 
 char *strstr(const char *haystack, const char *needle);
 
-// int printf(const char *format, ...);
+// not added (snprintf and vsnprintf)
+int snprintf(char *str, size_t size, const char *format, ...);
+int vsnprintf(char *str, size_t size, const char *format, va_list ap);
+
+int vsprintf(char *buf, const char *fmt, va_list args);
+int sprintf(char *buf, const char *fmt, ...);
+
+int printf(const char *format, ...);
