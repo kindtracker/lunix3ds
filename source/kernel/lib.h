@@ -2,6 +2,7 @@
 #include "kernel/lib/fmt.h"
 #include "kernel/fs.h"
 #include "kernel/console.h"
+#include "kernel/boot.h"
 #include "fatfs/qff.h"
 #include "common/common.h"
 

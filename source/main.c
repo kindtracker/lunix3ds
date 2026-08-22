@@ -47,6 +47,7 @@ void main(int argc, char** argv) {
 
   ClearScreenF(true, true, COLOR_STD_BG);
   
+  int i = 0;
   while (true) {  
     if ((!(system_shellstate() & 2)) || system_special_keys()) {
       break;
@@ -57,17 +58,17 @@ void main(int argc, char** argv) {
     bottom_screen = bottom_screen_fb[current_fb];
     console.screen = top_screen;
 
+    printf("bright_lvl: %d\n", i++);
     if (console.new) {
-      ClearScreenF(true, true, COLOR_STD_BG);
       console_draw(&console);
       console.new = false;
     }
     boot();
 
     int bright_lvl = (system_volume_slider() >> 2);
-    printf("bright_lvl: %d\n", bright_lvl);
 
     // TODO: implement/fix vblank, framebuffer swaping
+    system_wait(1000 / 30)
   }
 
   fs_deinit();

@@ -47,7 +47,8 @@ COMMON_INCLUDES := \
 	-I$(PROJECT)/source/nand \
 	-I$(PROJECT)/source/safety \
 	-I$(PROJECT)/source/utils \
-	-I$(PROJECT)/source/kernel
+	-I$(PROJECT)/source/kernel \
+	-I$(PROJECT)/source/kernel/lib
 
 # =============================================================================
 # ARM9
@@ -91,6 +92,7 @@ ARM9_SOURCES := \
 	$(wildcard $(PROJECT)/source/safety/*.c) \
 	$(wildcard $(PROJECT)/source/utils/*.c) \
 	$(wildcard $(PROJECT)/source/kernel/*.c) \
+	$(wildcard $(PROJECT)/source/kernel/lib/*.c) \
 	$(wildcard $(PROJECT)/source/*.s) \
 	$(wildcard $(PROJECT)/source/common/*.s) \
 	$(wildcard $(PROJECT)/source/common/hardware/*.s) \

@@ -29,6 +29,7 @@ void console_draw(console_t *console) {
   int first_line = 0;
   if (lines >= visible_lines) {
     first_line = lines - visible_lines;
+    ClearScreenF(true, true, COLOR_STD_BG);
   }
 
   int current_line = 0;
