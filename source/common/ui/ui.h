@@ -7,6 +7,7 @@
 #include "common.h"
 
 #define BYTES_PER_PIXEL 3
+#define BPP BYTES_PER_PIXEL
 #define SCREEN_HEIGHT 240
 #define SCREEN_WIDTH_TOP 400
 #define SCREEN_WIDTH_BOT 320

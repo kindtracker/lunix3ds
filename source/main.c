@@ -8,8 +8,6 @@
 #include "kernel/boot.h"
 #include "kernel/lib.h"
 
-uint8_t *top_screen_fb[2];
-uint8_t *bottom_screen_fb[2];
 uint8_t *top_screen;
 uint8_t *bottom_screen;
 
@@ -26,49 +24,34 @@ static const u8 brightness_lvls[] = {
 void main(int argc, char** argv) {
   if (argc >= 2) {
     uint8_t **fb = (uint8_t **)(void *)argv[1];
-    top_screen_fb[0] = fb[0];
-    top_screen_fb[1] = fb[1];
-    bottom_screen_fb[0] = fb[2];
-    bottom_screen_fb[1] = fb[3];
-    top_screen = top_screen_fb[0];
-    bottom_screen = bottom_screen_fb[0];
+    top_screen = fb[0];
+    bottom_screen = fb[2];
   } else {
-    top_screen_fb[0] = (uint8_t *)(*(uint32_t *)0x23FFFE00);
-    top_screen_fb[1] = (uint8_t *)(*(uint32_t *)0x23FFFE04);
-    bottom_screen_fb[0] = (uint8_t *)(*(uint32_t *)0x23FFFE08);
-    bottom_screen_fb[1] = (uint8_t *)(*(uint32_t *)0x23FFFE0C);
-    top_screen = top_screen_fb[0];
-    bottom_screen = bottom_screen_fb[0];
+    top_screen = (uint8_t *)(*(uint32_t *)0x23FFFE00);
+    bottom_screen = (uint8_t *)(*(uint32_t *)0x23FFFE08);
   }
 
   booting = 0;
   boot();
-  console.screen = top_screen_fb[0];
+  console.screen = top_screen;
 
   ClearScreenF(true, true, COLOR_STD_BG);
   
-  int i = 0;
   while (true) {  
     if ((!(system_shellstate() & 2)) || system_special_keys()) {
       break;
     }
 
-    current_fb = !current_fb;
-    top_screen = top_screen_fb[current_fb];
-    bottom_screen = bottom_screen_fb[current_fb];
-    console.screen = top_screen;
-
-    printf("bright_lvl: %d\n", i++);
+    int bright_lvl = (system_volume_slider() >> 2);
+    printf("bright_lvl: %d\n", bright_lvl);
+    
     if (console.new) {
       console_draw(&console);
       console.new = false;
     }
     boot();
 
-    int bright_lvl = (system_volume_slider() >> 2);
-
-    // TODO: implement/fix vblank, framebuffer swaping
-    system_wait(1000 / 30)
+    system_wait(1000 / 30);
   }
 
   fs_deinit();

@@ -17,35 +17,58 @@ void console_puts(console_t *console, const char *str) {
   }
 }
 
+static void console_scroll(console_t *console) {
+  uint8_t *fb = console->screen;
+
+  const int width = SCREEN_WIDTH_TOP;
+  const int height = SCREEN_HEIGHT_TOP;
+  const int scroll = 8;
+
+  for (int x = 0; x < width; x++) {
+    uint8_t *column = fb + x * height * BPP;
+    memmove(column + scroll * BPP, column, (height - scroll) * BPP);
+    memset(column, 0, scroll * BPP);
+  }
+}
+
 void console_draw(console_t *console) {
-  int lines = 0;
+  int lines = 1;
+  int x = 0;
+
   for (int i = 0; i < console->buffer_len; i++) {
     char chr = console->buffer[i];
     if (chr == '\n') {
       lines++;
+      x = 0;
+      continue;
     }
+    if (x + 8 > SCREEN_WIDTH_TOP) {
+      lines++;
+      x = 0;
+    }
+    x += 8;
   }
+  
   int visible_lines = SCREEN_HEIGHT_TOP / 8;
-  int first_line = 0;
-  if (lines >= visible_lines) {
-    first_line = lines - visible_lines;
-    ClearScreenF(true, true, COLOR_STD_BG);
+  if (lines > (visible_lines + console->scroll)) {
+    console_scroll(console);
+    console->scroll++;
   }
 
   int current_line = 0;
-  int x = 0;
   int y = 0;
+  x = 0;
   for (int i = 0; i < console->buffer_len; i++) {
     char chr = console->buffer[i];
     if (chr == '\n') {
       current_line++;
-      if (current_line > first_line) { 
-        x = 0;
+      x = 0;
+      if (current_line >= console->scroll) { 
         y += 8; 
       }
       continue;
     }
-    if (current_line < first_line) { 
+    if (current_line < console->scroll) { 
       continue;
     }
 
@@ -53,7 +76,8 @@ void console_draw(console_t *console) {
     x += 8;
     if (x + 8 > SCREEN_WIDTH_TOP) {
       x = 0;
-      y += 8;
+      y += 8; 
+      current_line++;
     }
   }
 }

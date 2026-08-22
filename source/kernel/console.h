@@ -6,6 +6,7 @@ typedef struct {
   uint8_t *screen;
   char buffer[16384];
   int buffer_len;
+  int scroll;
   bool new;
 } console_t;
 
