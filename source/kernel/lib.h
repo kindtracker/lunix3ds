@@ -3,6 +3,7 @@
 #include "kernel/fs.h"
 #include "kernel/console.h"
 #include "kernel/boot.h"
+#include "kernel/arm11.h"
 #include "fatfs/qff.h"
 #include "common/common.h"
 

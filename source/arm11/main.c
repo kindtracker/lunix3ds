@@ -1,12 +1,6 @@
 #include <stdint.h>
 #include "arm11.h"
 
-#define PDC_TOP_FB_STATUS    (*(volatile uint32_t *)0x10400478)
-#define PDC_BOTTOM_FB_STATUS (*(volatile uint32_t *)0x10400578)
-
-#define PDC_TOP_FB_SELECT    (*(volatile uint32_t *)0x10400478)
-#define PDC_BOTTOM_FB_SELECT (*(volatile uint32_t *)0x10400578)
-
 volatile uint32_t *operation = (volatile uint32_t *)0x1FF80004;
 volatile uint32_t *parameter = (volatile uint32_t *)0x1FF80008;
 
@@ -14,18 +8,8 @@ void arm11_main() {
   *operation = ARM11_READY;
   *parameter = 0;
   for (;;) {
-    if (*operation == ARM11_SWAP) {
-      uint32_t is_alt = *parameter & 1;
-
-      PDC_TOP_FB_SELECT = is_alt;
-      PDC_BOTTOM_FB_SELECT = is_alt;
-
-      *operation = ARM11_READY;
-    } else if (*operation == ARM11_GET_STATUS_TOP) {
-      *parameter = PDC_TOP_FB_STATUS;
-      *operation = ARM11_READY;
-    } else if (*operation == ARM11_GET_STATUS_BOT) {
-      *parameter = PDC_BOTTOM_FB_STATUS;
+    if (*operation == ARM11_SET_BRIGHT) {
+      *((volatile uint32_t *)(0x10202240)) = *parameter;
       *operation = ARM11_READY;
     }
   }
